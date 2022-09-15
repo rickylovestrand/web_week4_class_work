@@ -41,6 +41,17 @@
         let newText = textInputElement.value // read the value property
         console.log(newText)
         
+        // Validate text. Must be 1 to 50 characters
+        if (newText.length == 0) {
+            // do nothing
+            return
+        }
+        
+        if (newText.length > 50) {
+            alert('This text is too long')
+            return
+        }
+
         // Make a new list item element
         let newListItemElement = document.createElement('li') //create list item    
         newListItemElement.innerHTML = newText
