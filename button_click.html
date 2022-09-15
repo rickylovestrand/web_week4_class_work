@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Button Click</title>
+  </head>
+  <body>
+    <!-- Write your HTML content here -->
+    <button>Click here!</button>
+  
+  <script>
+    // Write your script here
+    let lonelybutton = document.querySelector('button')
+
+    lonelybutton.addEventListener('click', function() {
+        alert('You clicked the button!')
+        //lonelybutton.innerHTML = 'You clicked the button!'
+        //lonelybutton.style.backgroundColor = 'red'
+        lonelybutton.remove()
+    })
+
+  </script>
+
+  </body>
+</html>

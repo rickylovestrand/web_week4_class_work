@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>List of Items</title>
+  </head>
+  <body>
+
+    <h1>Generate a list with Javascript!</h1>
+    <!-- text input -->
+    <input id="text-input" type="text">
+
+    <!-- Javascript will make the button work-->
+    <button id="add-text-button">Add the text to the list</button>
+
+    <ul id="list-of-text-entries">
+        <!-- empty! -->
+    </ul>
+
+    <button id="clear-list-button">Clear the list</button>
+
+  <script>
+
+    // Find the elements on the page that JavaScript will need to work with
+    let textInputElement = document.querySelector('#text-input')
+    let addNewTextButton = document.querySelector('#add-text-button')
+    let textUnorderedList = document.querySelector('#list-of-text-entries')
+    let clearListButton = document.querySelector('#clear-list-button')
+
+    let numberOfListItems = 0 // create counter variable
+
+    // When user adds text and clicks button, add text as new list element
+    addNewTextButton.addEventListener('click', function() {
+
+        if (numberOfListItems >=10) {
+            //don't add it to the list
+            alert('Your list is full')
+            return
+        }
+
+        let newText = textInputElement.value // read the value property
+        console.log(newText)
+        
+        // Make a new list item element
+        let newListItemElement = document.createElement('li') //create list item    
+        newListItemElement.innerHTML = newText
+
+        // Append the new list item
+        textUnorderedList.appendChild(newListItemElement)
+
+        //Clear the input
+        textInputElement.value = ''
+
+        numberOfListItems++
+        console.log(numberOfListItems)
+    })
+
+    clearListButton.addEventListener('click', function(){
+        textUnorderedList.innerHTML = ''
+        // reset the number of list items to 0
+        numberOfListItems = 0
+    })
+
+
+  </script>
+
+  </body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Quiz Game</title>
+  </head>
+  <body>
+
+    <!-- Write your HTML content here -->
+    <p>What is the capital of Wisconsin?</p>
+
+    <button class="wrong-answer">Bayfield</button>
+    <button id="correct-answer">Madison</button>
+    <button class="wrong-answer">Milwaukee</button>
+
+    <p id="result"></p>
+  
+  <script>
+
+    // Write your script here
+
+    let correctAnswerButton = document.querySelector('#correct-answer')
+    console.log(correctAnswerButton)
+
+    let defaultbuttonColor = correctAnswerButton.style.background
+
+    let result = document.querySelector('#result')
+
+    let wrongAnswerButtons = document.querySelectorAll('.wrong-answer')
+    
+    // add an event listener to both wrong answer buttons
+    wrongAnswerButtons.forEach(function(wrongAnswerButton) {
+
+        // add click kevent listener to wrong answer button
+        wrongAnswerButton.addEventListener('click', function() {
+            result.innerHTML = 'Wrong answer, try again'
+            correctAnswerButton.style.background = defaultbuttonColor
+        })
+    } )
+
+
+    correctAnswerButton.addEventListener('click', function() {
+        result.innerHTML = 'Correct answer!'
+        correctAnswerButton.style.background = 'cyan'
+    })
+
+
+  </script>
+
+  </body>
+</html>
