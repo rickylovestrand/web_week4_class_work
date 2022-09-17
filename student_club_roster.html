@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Club Membership</title>
+
+  <style>
+      
+      .selected {
+        text-decoration: line-through;
+        font-style: italic;
+        color: gray;
+      }
+
+      input {
+          width: 100%;
+          padding: 5px;
+          margin: 5px 5px 5px 0px;
+          box-sizing: border-box;
+
+      }
+
+  </style>
+
+</head>
+<body>
+
+    <h1>Student Club Roster</h1>
+
+    <h2>Add Students</h2>
+
+    <label for="student-name">Student Name</label>
+    <input id="student-name" name="student-name">
+    <br>
+    <label for="student-id">Student ID</label>
+    <input id="student-id" name="student-id">
+    <br>
+    <label for="student-gpa">Student GPA</label>
+    <input id="student-gpa" name="student-gpa" type="number">
+    <br>
+    <button id="add-student">Add Student</button>    
+
+    <h2>Student List</h2>
+
+    <p id="count-description">There are 
+        <span id="student-count">
+          <!-- use JavaScript to count the number of students, and show here -->         
+        </span> 
+    students in the club.</p>
+    
+
+    <ul id="student-list">
+        <!-- use JavaScript to create li elements  -->
+    </ul>
+
+    <button id="remove-selected-students">Remove selected students</button>
+
+<script>
+
+    let eStudentName = document.querySelector('#student-name')
+    let eStudentID = document.querySelector('#student-id')
+    let eStudentGPA = document.querySelector('#student-gpa')
+
+    let eStudentList = document.querySelector('#student-list')
+    let eAddStudentButton = document.querySelector('#add-student')
+    let eCountDescription = document.querySelector('#count-description')
+    let eRemoveStudents = document.querySelector('#remove-selected-students')
+
+    let eStudentCount = document.querySelector('#student-count')
+    let studentCount = 0 // student count variable
+
+    // show count of 0 when the page loads
+    window.addEventListener('load', function(){
+        eStudentCount.innerHTML = studentCount
+    })
+
+    // respond when the Add Student button is clicked
+    eAddStudentButton.addEventListener('click', function(){
+        
+        // read the values from the inputs
+        let studentName = eStudentName.value
+        let studentID = eStudentID.value
+        let studentGPA = eStudentGPA.value
+
+        // validate the input
+        if (studentName == ''){
+            alert('You must enter a student name')
+            return
+        } 
+        if (studentID == ''){
+            alert('You must enter a student ID')
+            return
+        }
+        if (studentGPA == '' | studentGPA < 0 | studentGPA > 4) {
+            alert('You must enter a student GPA from 0 to 4')
+            return
+        }
+
+        // Input is valid. Create new list item element and add it to the list.
+        // Toggle the class selected when it is clicked
+        let eNewStudentListItem = document.createElement('li')
+        eNewStudentListItem.innerHTML = `${studentName}, ID:${studentID}, GPA ${studentGPA}`
+        eNewStudentListItem.onclick = function(){
+            this.classList.toggle('selected')
+            console.log(eNewStudentListItem)
+        }
+        eStudentList.appendChild(eNewStudentListItem)
+
+        // Clear the inputs
+        eStudentName.value = ''
+        eStudentID.value = ''
+        eStudentGPA.value = ''
+
+        // Update the student count and update the description
+        studentCount++
+        console.log(studentCount)
+        eStudentCount.innerHTML = studentCount
+
+        // Check to see if the grammar needs fixing if there is only one student
+        updateCountDescription(studentCount)
+    })
+
+    // remove the selected students
+    eRemoveStudents.addEventListener('click', function(){
+        let studentsToRemove = document.querySelectorAll('.selected')
+        studentsToRemove.forEach(function(student){
+            student.remove()
+        })
+        
+        // Update the description
+        studentCount = document.getElementsByTagName('li').length
+        updateCountDescription(studentCount)
+    })
+
+    function updateCountDescription(studentCount){
+        if (studentCount == 1) {
+            eCountDescription.innerHTML = `There is ${studentCount} student in the club.`
+        } else {
+            eCountDescription.innerHTML = `There are ${studentCount} students in the club.`
+        }
+    }
+
+</script>
+
+</body>
+</html>
